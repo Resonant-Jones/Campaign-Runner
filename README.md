@@ -1,6 +1,3 @@
-Absolutely. I’d tighten the structure, reduce a little repetition, sharpen the “what this is” framing, and make the deterministic/runtime philosophy feel intentional instead of defensive.
-
-Here’s a version that feels more like a serious alpha infrastructure artifact and less like a disclaimer scroll carved into a cave wall by a sleep-deprived systems monk at 2:11 AM. 🜂
 
 ````md
 # Codex Runner
