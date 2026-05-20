@@ -1,36 +1,63 @@
-# Codex Runner 
+Absolutely. I’d tighten the structure, reduce a little repetition, sharpen the “what this is” framing, and make the deterministic/runtime philosophy feel intentional instead of defensive.
 
-Private-alpha package for sharing the deterministic Codex Runner path.
+Here’s a version that feels more like a serious alpha infrastructure artifact and less like a disclaimer scroll carved into a cave wall by a sleep-deprived systems monk at 2:11 AM. 🜂
 
-This repository is intentionally narrow:
+````md
+# Codex Runner
 
-- it is not public open source
-- it is not ready for public PyPI publishing
-- it packages the deterministic runner first
-- Pi is treated as the future provider-neutral/offline harness layer for Guardian, not the default friend-share CLI surface
-- Codex, Claude, and other providers are execution providers behind the harness boundary, not conceptual owners of Codex Runner
+Deterministic audit-to-campaign execution runner for structured repository analysis and task orchestration.
 
-## What this repo is for
+Codex Runner packages a narrow, shareable execution path extracted from a larger internal orchestration system. The focus is deterministic execution, schema-validated planning, and provider-agnostic runtime boundaries.
 
-Use this checkout when you want a standalone, shareable Codex Runner package without exposing the full Codexify repository or adjacent project appliances.
+## Design Intent
 
-The default path is the deterministic runner. The TUI is optional and only appears if you install the `tui` extra.
+This repository is intentionally constrained.
 
-## Install from a local checkout
+- Private-alpha friend-share package
+- Not public open source
+- Not intended for public PyPI distribution
+- Deterministic runner is the primary execution surface
+- Optional TUI layer exists behind the `tui` extra
+- Providers such as Codex or Claude operate behind the harness boundary and are treated as interchangeable execution engines rather than architectural owners
+
+The long-term architecture separates orchestration, identity, and execution into distinct layers. Experimental future work around provider-neutral and offline execution remains outside the default CLI path.
+
+---
+
+## What This Repository Is For
+
+Use this repository when you want a standalone Codex Runner package without exposing adjacent systems, internal infrastructure, or the broader Codexify project surface.
+
+The intended workflow is:
+
+1. Analyze a repository or target workspace
+2. Produce structured audit output
+3. Compile deterministic execution plans
+4. Execute tasks through schema-validated orchestration
+
+Dry-run inspection is the default recommended starting point.
+
+---
+
+## Installation
+
+### Install From Local Checkout
 
 From the repository root:
 
 ```bash
 python3 -m pip install -e .
-```
+````
 
-If you want the optional interactive TUI:
+Install with optional interactive TUI support:
 
 ```bash
 python3 -m pip install -e .[tui]
 ```
 
-## Install from a local wheel
+---
+
+### Install From a Local Wheel
 
 Build the distribution:
 
@@ -44,11 +71,13 @@ Install the wheel:
 python3 -m pip install --force-reinstall dist/*.whl
 ```
 
-The installed wheel ships the bundled prompts, schemas, and templates under the `codex_runner` package path.
+The packaged wheel includes bundled prompts, templates, and JSON schemas under the `codex_runner` package path.
 
-## Recommended first command
+---
 
-Start in dry-run mode and inspect the planned work before allowing execution:
+## Recommended First Run
+
+Start in dry-run mode and inspect the generated execution plan before allowing task execution:
 
 ```bash
 codexrun --dry-run \
@@ -60,24 +89,39 @@ codexrun --dry-run \
   --task-result-schema-file src/codex_runner/schemas/task_result.schema.json
 ```
 
-If you are working from an installed wheel instead of a checkout, point the prompt and schema flags at the installed package files under `site-packages/codex_runner/`.
+If working from an installed wheel rather than a repository checkout, point prompt and schema arguments at the installed package files under:
 
-## Module entrypoint
+```text
+site-packages/codex_runner/
+```
 
-`python -m codex_runner` remains supported after installation and maps to the same deterministic runner entrypoint as `codexrun`.
+---
 
-## Execute mode and clean trees
+## Module Entrypoint
 
-Do not run execute mode on a dirty repo unless you are intentionally testing failure behavior.
+The module entrypoint remains supported after installation:
 
-Deterministic execute mode expects the auto-commit invariant to hold. The runner rejects `--no-auto-commit` in deterministic mode so the clean-tree contract stays explicit.
+```bash
+python -m codex_runner
+```
 
-## Pi boundary
+This maps to the same deterministic runner entrypoint as `codexrun`.
 
-Pi is a future provider-neutral/offline harness layer for Guardian. It is documented here as an experimental boundary note, not as the default friend-share CLI path.
+---
 
-This repo does not make Pi the conceptual owner of Codex Runner.
+## Execute Mode Expectations
+
+Deterministic execute mode assumes a clean repository state.
+
+Running against a dirty tree is discouraged unless intentionally testing failure or recovery behavior.
+
+The deterministic runner rejects `--no-auto-commit` in execute mode to preserve explicit execution invariants and auditability guarantees.
+
+---
 
 ## Status
 
-This package is a private-alpha friend-share build. Access may be revoked, and the license and safety notes in this repo remain part of the intended usage contract.
+Codex Runner is currently a private-alpha friend-share package.
+
+Interfaces, execution semantics, packaging strategy, and licensing terms may change without notice as the system evolves.
+
