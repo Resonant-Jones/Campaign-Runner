@@ -1,6 +1,6 @@
-# Codex Runner Friend Share
+# Codex Runner 
 
-Private-alpha package for sharing the deterministic Codex Runner path with trusted friends.
+Private-alpha package for sharing the deterministic Codex Runner path.
 
 This repository is intentionally narrow:
 
